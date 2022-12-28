@@ -18,10 +18,7 @@ namespace GrainServiceApp.GrainServices
 
         public Task<IReadOnlyList<AlfaData>> TestMethod()
         {
-            // Not sure how get grainService reference:
-            var grainId = GrainId.Create(nameof(AlfaGrainService), Guid.Empty.ToString());
-            var service = GetGrainService(grainId);
-            // -------------------------------------
+            var service = GetGrainService(CurrentGrainReference.GrainId);
 
             return service.TestMethod();
         }

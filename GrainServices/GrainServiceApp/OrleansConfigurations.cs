@@ -23,10 +23,9 @@ namespace GrainServiceApp
 
                     // Grain service registration:
                     siloBuilder
-                    .AddGrainService<AlfaGrainService>()  // Register grainService like this ??
+                    .AddGrainService<AlfaGrainService>()
                     .ConfigureServices(services =>
                     {
-                        //services.AddSingleton<IAlfaGrainService, AlfaGrainService>(); // or only as sigleton service ??
                         services.AddSingleton<IAlfaGrainServiceClient, AlfaGrainServiceClient>();
                     });
                 });

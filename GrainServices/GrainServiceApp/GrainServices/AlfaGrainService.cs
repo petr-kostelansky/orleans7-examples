@@ -2,7 +2,6 @@
 using Orleans.Concurrency;
 using Orleans.Runtime;
 using Orleans.Services;
-using System.Reflection.Metadata.Ecma335;
 
 namespace GrainServiceApp.GrainServices
 {
@@ -14,24 +13,21 @@ namespace GrainServiceApp.GrainServices
     [Reentrant]
     public class AlfaGrainService : GrainService, IAlfaGrainService
     {
-        readonly IGrainFactory _grainFactory;
         private readonly ILogger<AlfaGrainService> logger;
 
         public AlfaGrainService(
-            IServiceProvider services,
+            GrainId grainId,
             Silo silo,
+            IServiceProvider services,
             ILoggerFactory loggerFactory,
-            IGrainFactory grainFactory,
             ILogger<AlfaGrainService> logger)
-            : base(GrainId.Create(nameof(AlfaGrainService), Guid.Empty.ToString()), silo, loggerFactory)
+            : base(grainId, silo, loggerFactory)
         {
-            _grainFactory = grainFactory;
             this.logger = logger;
         }
 
         public override Task Init(IServiceProvider serviceProvider) =>
             base.Init(serviceProvider);
-
 
         public override Task Start() => base.Start();
 
